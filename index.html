@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <script defer src="./script.js"></script>
+
+    <title>Frontend Mentor | Contact form</title>
+  </head>
+  <body>
+    <!--card-->
+    <main>
+      <!--header-->
+      <header>
+        <h1>Contact Us</h1>
+      </header>
+
+      <!--success toast-->
+      <figure class="success-message hidden" id="success-message">
+        <figcaption>
+          <img
+            src="./assets/images/icon-success-check.svg"
+            alt="success check icon"
+          />
+          <span> Message Sent! </span>
+        </figcaption>
+        <p>Thanks for completing the form. We'll be in touch soon!</p>
+      </figure>
+
+      <!--form-->
+      <form id="contact-form">
+        <!--form fields-->
+        <section class="form-fields">
+          <!--first name-->
+          <div class="form-field grid-first-name">
+            <label class="title-block" for="first-name"
+              >First Name <span>*</span></label
+            >
+
+            <input
+              type="text"
+              class="text-input"
+              id="first-name"
+              autocomplete="name"
+              aria-describedby="first-name-error"
+              required
+            />
+
+            <p class="error hidden" id="first-name-error"></p>
+          </div>
+
+          <!--last name-->
+          <div class="form-field grid-last-name">
+            <label class="title-block" for="last-name"
+              >Last Name <span>*</span></label
+            >
+
+            <input
+              type="text"
+              class="text-input"
+              id="last-name"
+              autocomplete="name"
+              aria-describedby="last-name-error"
+              required
+            />
+
+            <p class="error hidden" id="last-name-error"></p>
+          </div>
+
+          <!--email address-->
+          <div class="form-field grid-email">
+            <label class="title-block" for="email"
+              >Email Address <span>*</span></label
+            >
+
+            <input
+              type="email"
+              class="text-input"
+              id="email"
+              autocomplete="email"
+              aria-describedby="email-error"
+              required
+            />
+
+            <p class="error hidden" id="email-error"></p>
+          </div>
+
+          <!--contact method-->
+          <fieldset class="form-field form-field--radio-set grid-radio-set">
+            <!--title-->
+            <legend class="title-block">Query Type <span>*</span></legend>
+
+            <!--radio selection-->
+            <div class="radio-selections">
+              <!--general enquiry-->
+              <div class="radio-selection">
+                <input
+                  type="radio"
+                  id="general-enquiry"
+                  name="contact-method"
+                  value="general enquiry"
+                  aria-describedby="contact-method-error"
+                  required
+                />
+
+                <label for="general-enquiry">
+                  <div
+                    class="custom-radio"
+                    id="custom-radio-general-enquiry"
+                  ></div>
+                  General Enquiry</label
+                >
+              </div>
+
+              <!--support request-->
+              <div class="radio-selection">
+                <input
+                  type="radio"
+                  id="support-request"
+                  name="contact-method"
+                  value="support request"
+                  aria-describedby="contact-method-error"
+                  required
+                />
+                <label for="support-request">
+                  <div
+                    class="custom-radio"
+                    id="custom-radio-support-request"
+                  ></div>
+                  Support Request</label
+                >
+              </div>
+            </div>
+
+            <p class="error hidden" id="contact-method-error"></p>
+          </fieldset>
+
+          <!--message-->
+          <div class="form-field grid-message">
+            <label class="title-block" for="message"
+              >Message <span>*</span></label
+            >
+
+            <textarea
+              id="message"
+              aria-describedby="message-error"
+              required
+            ></textarea>
+
+            <p class="error hidden" id="message-error"></p>
+          </div>
+        </section>
+
+        <!--checkbox-->
+        <section class="form-checkbox">
+          <!--consent-->
+          <input
+            type="checkbox"
+            id="consent"
+            aria-describedby="consent-text consent-error"
+            required
+          />
+
+          <!--custom checkbox-->
+          <label for="consent" class="custom-check" id="custom-check"></label>
+
+          <p id="consent-text">
+            I consent to being contacted by the team <span>*</span>
+          </p>
+
+          <p class="error hidden" id="consent-error"></p>
+        </section>
+
+        <!--button-->
+        <section class="form-submit">
+          <button type="submit" id="submit-button">Submit</button>
+        </section>
+      </form>
+    </main>
+  </body>
+</html>

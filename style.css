@@ -1,0 +1,450 @@
+/*import the font family*/
+@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap");
+
+/*CSS variables*/
+:root {
+  /*colors from the design system*/
+  /*white*/
+  --color-white: #ffffff;
+
+  /*grey*/
+  --color-grey-900: #2a4144;
+  --color-grey-500: #86a2a5;
+
+  /*green*/
+  --color-green-600: #0c7d69;
+  --color-green-200: #e0f1e8;
+
+  /*red - errors*/
+  --color-red: #d73c3c;
+
+  /*typography presets from the design system*/
+  /*default app font family*/
+  --font-family: "Karla", sans-serif;
+
+  /*heading - Karla Bold*/
+  --heading-font-size: 32px;
+  --heading-letter-spacing: -1px;
+  --heading-font-weight: 700;
+
+  /*body md - Karla Bold/Regular*/
+  --body-md-font-size: 18px;
+  --body-md-line-height: 150%;
+  --body-md-bold-font-weight: 700;
+
+  /*body sm - Karla Regular*/
+  --body-sm-font-size: 16px;
+  --body-sm-line-height: 150%;
+
+  /*spacings from the design system*/
+  --spacing-100: 8px;
+  --spacing-150: 12px;
+  --spacing-200: 16px;
+  --spacing-300: 24px;
+  --spacing-400: 32px;
+  --spacing-500: 40px;
+  --spacing-1600: 128px;
+
+  /*radiuses*/
+  --radius-100: 8px;
+  --radius-150: 12px;
+  --radius-200: 16px;
+
+  /*element sizes*/
+  --text-area-height: 240px;
+  --custom-radio-size: 19.5px;
+  --checkbox-size: 18px;
+}
+
+/*default styles*/
+html,
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100dvw;
+
+  /*default app font family*/
+  font-family: var(--font-family);
+
+  background-color: var(--color-green-200);
+
+  /*padding on mobile 32px 16px*/
+  padding: var(--spacing-400) var(--spacing-200);
+}
+
+main {
+  width: 100%;
+
+  /*center horizontally*/
+  margin: 0 auto;
+
+  /*center the form*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /*gap 32px - between the header and the form on mobile*/
+  gap: var(--spacing-400);
+
+  background-color: var(--color-white);
+
+  /*padding on mobile 24px*/
+  padding: var(--spacing-300);
+
+  border-radius: var(--radius-200);
+}
+
+/*app heading - Contact Us*/
+h1 {
+  /*heading text preset*/
+  font-size: var(--heading-font-size);
+  font-weight: var(--heading-font-weight);
+  letter-spacing: var(--heading-letter-spacing);
+  color: var(--color-grey-900);
+}
+
+.success-message {
+  width: 87.2%;
+
+  position: fixed;
+  top: var(--spacing-300);
+  left: 50%;
+  transform: translateX(-50%);
+
+  /*1 col flex*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-100);
+
+  padding: var(--spacing-300);
+
+  background-color: var(--color-grey-900);
+
+  border-radius: var(--radius-150);
+}
+
+.success-message figcaption {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-100);
+}
+
+.success-message figcaption > span {
+  font-size: var(--body-md-font-size);
+  font-weight: var(--body-md-bold-font-weight);
+  line-height: var(--body-md-line-height);
+  color: var(--color-white);
+}
+
+.success-message p {
+  font-size: var(--body-sm-font-size);
+  line-height: var(--body-sm-line-height);
+  color: var(--color-green-200);
+}
+
+form {
+  width: 100%;
+
+  /*1 col flex on mobile*/
+  display: flex;
+  flex-direction: column;
+  /*gap 40px between the sections on mobile*/
+  gap: var(--spacing-500);
+}
+
+/*classes text presets*/
+/*body md, grey 900*/
+.form-field textarea,
+.text-input,
+.radio-selection label {
+  font-size: var(--body-md-font-size);
+  line-height: var(--body-md-line-height);
+  color: var(--color-grey-900);
+}
+
+/*body sm, grey 900*/
+.title-block,
+.form-checkbox label {
+  font-size: var(--body-sm-font-size);
+  line-height: var(--body-sm-line-height);
+  color: var(--color-grey-900);
+}
+
+/*other styles*/
+.form-fields {
+  /*1 col on mobile*/
+  display: grid;
+  /*gap 24px on mobile*/
+  gap: var(--spacing-300);
+}
+
+.form-field {
+  /*1 col flex on mobile*/
+  display: flex;
+  flex-direction: column;
+  /*gap 8px on mobile*/
+  gap: var(--spacing-100);
+}
+
+/*contact method <fieldset>*/
+.form-field--radio-set {
+  border: none;
+}
+
+.form-field--radio-set legend {
+  /*16px gap on mobile*/
+  margin-bottom: var(--spacing-200);
+}
+
+/*message*/
+.form-field textarea {
+  height: var(--text-area-height);
+
+  padding: var(--spacing-150) var(--spacing-300);
+
+  outline: 1px solid var(--color-grey-500);
+  border: none;
+  border-radius: var(--radius-100);
+
+  resize: none;
+}
+
+.form-field textarea:focus {
+  outline: 1.6px solid var(--color-green-600);
+}
+
+.title-block {
+  display: flex;
+  gap: var(--spacing-100);
+}
+
+/*required asterisk*/
+.title-block span {
+  color: var(--color-green-600);
+}
+
+.text-input {
+  padding: var(--spacing-150) var(--spacing-300);
+
+  outline: 1px solid var(--color-grey-500);
+  border: none;
+  border-radius: var(--radius-100);
+}
+
+.text-input:focus {
+  outline: 1.6px solid var(--color-green-600);
+}
+
+.radio-selections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-200);
+}
+
+.radio-selection {
+  display: flex;
+  align-items: center;
+
+  outline: 1px solid var(--color-grey-500);
+  border-radius: var(--radius-100);
+}
+
+.radio-selection label {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-100);
+
+  border-radius: inherit;
+
+  padding: var(--spacing-150) var(--spacing-300);
+
+  cursor: pointer;
+}
+
+.radio-selection label:hover,
+.radio-selection label:active {
+  background-color: var(--color-green-200);
+}
+
+/*hide default radio buttons*/
+/*hide default checkbox inpt*/
+.radio-selection input,
+.form-checkbox input {
+  height: 0;
+  width: 0;
+  opacity: 0;
+}
+
+/*custom radio input*/
+.custom-radio {
+  height: var(--custom-radio-size);
+  width: var(--custom-radio-size);
+
+  outline: 1px solid var(--color-grey-500);
+
+  border-radius: 999px;
+}
+
+.custom-radio-selected {
+  outline: none;
+
+  background: no-repeat center url("./assets/images/icon-radio-selected.svg");
+  background-size: cover;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-200);
+}
+
+.form-checkbox label > span {
+  color: var(--color-green-600);
+}
+
+/*custom checkbox*/
+.custom-check {
+  height: var(--checkbox-size);
+  width: var(--checkbox-size);
+
+  outline: 1px solid var(--color-grey-500);
+
+  cursor: pointer;
+}
+
+.custom-check-selected {
+  outline: none;
+
+  background: no-repeat center url("./assets/images/icon-checkbox-check.svg");
+  background-size: cover;
+}
+
+.form-submit button {
+  width: 100%;
+
+  font-size: var(--body-md-font-size);
+  font-weight: var(--body-md-bold-font-weight);
+  line-height: var(--body-md-line-height);
+  color: var(--color-white);
+
+  background-color: var(--color-green-600);
+
+  border-radius: var(--spacing-100);
+  border: none;
+
+  padding: var(--spacing-200);
+
+  cursor: pointer;
+}
+
+.form-submit button:hover {
+  background-color: var(--color-grey-900);
+}
+
+/*error element*/
+.error {
+  font-size: var(--body-sm-font-size);
+  line-height: var(--body-sm-line-height);
+  color: var(--color-red);
+}
+
+/*media queries*/
+@media (min-width: 768px) {
+  body {
+    /*center on larger screens*/
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  main {
+    /*decrease width*/
+    width: 90%;
+
+    /*padding on tablets 40px*/
+    padding: var(--spacing-500);
+  }
+
+  .success-message {
+    /*move it above the card*/
+    top: calc(var(--spacing-300) * -1);
+
+    /*decrease the width*/
+    width: 58.6%;
+  }
+
+  .form-fields {
+    /*grid placement*/
+    grid-template-areas:
+      "first last"
+      "email email"
+      "radio radio"
+      "message message";
+  }
+
+  .grid-first-name {
+    grid-area: first;
+  }
+
+  .grid-last-name {
+    grid-area: last;
+  }
+
+  .grid-email {
+    grid-area: email;
+  }
+
+  .grid-radio-set {
+    grid-area: radio;
+  }
+
+  .grid-message {
+    grid-area: message;
+  }
+
+  .radio-selections {
+    flex-direction: row;
+  }
+
+  .radio-selection {
+    flex-grow: 1;
+  }
+}
+
+@media (min-width: 1440px) {
+  main {
+    /*decrease the width*/
+    width: 51%;
+  }
+}
+
+.success-message {
+  /*move it above the card*/
+  top: calc(var(--spacing-500) * -1);
+
+  /*decrease the width*/
+  width: 31.2%;
+}
+
+/*utility classes*/
+.hidden {
+  display: none;
+}
+
+.input-error {
+  outline-color: var(--color-red);
+}
