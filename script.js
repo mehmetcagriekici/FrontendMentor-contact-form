@@ -109,6 +109,15 @@ function onSubmit(e) {
     //display the error
     radioErrorElement.innerText = state.error.message;
     radioErrorElement.classList.remove("hidden");
+
+    state.error.errorElementsList.push({
+      field: "contact-method-error",
+      input: "general-enquiry",
+    });
+    state.error.errorElementsList.push({
+      field: "contact-method-error",
+      input: "support-request",
+    });
   }
 
   //check for message

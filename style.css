@@ -112,18 +112,18 @@ h1 {
 }
 
 .success-message {
-  min-width: 87.2%;
-
   position: absolute;
   top: var(--spacing-300);
   left: 50%;
   transform: translateX(-50%);
 
+  width: 95.33%;
+
   /*1 col flex*/
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+
   gap: var(--spacing-100);
 
   padding: var(--spacing-300);
@@ -386,7 +386,7 @@ form {
     top: calc(var(--spacing-300) * -1);
 
     /*decrease the width*/
-    min-width: 58.6%;
+    width: 65.21%;
   }
 
   .form-fields {
@@ -431,12 +431,15 @@ form {
   main {
     /*decrease the width*/
     width: 51%;
+
+    /*appoint a max value for height for larger screens*/
+    max-height: 75.12%;
   }
 }
 
 .success-message {
   /*decrease the width*/
-  min-width: 31.2%;
+  width: 61.14%;
 }
 
 /*utility classes*/
