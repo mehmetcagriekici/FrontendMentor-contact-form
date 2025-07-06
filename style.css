@@ -80,6 +80,8 @@ body {
 }
 
 main {
+  position: relative;
+
   width: 100%;
 
   /*center horizontally*/
@@ -110,9 +112,9 @@ h1 {
 }
 
 .success-message {
-  width: 87.2%;
+  min-width: 87.2%;
 
-  position: fixed;
+  position: absolute;
   top: var(--spacing-300);
   left: 50%;
   transform: translateX(-50%);
@@ -384,7 +386,7 @@ form {
     top: calc(var(--spacing-300) * -1);
 
     /*decrease the width*/
-    width: 58.6%;
+    min-width: 58.6%;
   }
 
   .form-fields {
@@ -433,11 +435,8 @@ form {
 }
 
 .success-message {
-  /*move it above the card*/
-  top: calc(var(--spacing-500) * -1);
-
   /*decrease the width*/
-  width: 31.2%;
+  min-width: 31.2%;
 }
 
 /*utility classes*/

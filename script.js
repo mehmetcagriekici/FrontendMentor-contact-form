@@ -45,6 +45,8 @@ const state = {
     message: "",
     input: "", //id of the input element error occured
     field: "", //id of the corresponding error field
+    errorElementsList: [], //ids of the elements on which an error occured
+    errorStatus: false,
   },
 };
 
@@ -75,8 +77,6 @@ function onSubmit(e) {
 
     //display the error
     showError();
-
-    throw new Error(state.error.message);
   }
 
   //check for last name
@@ -86,8 +86,6 @@ function onSubmit(e) {
 
     //display the error
     showError();
-
-    throw new Error(state.error.message);
   }
 
   //check for email
@@ -97,8 +95,6 @@ function onSubmit(e) {
 
     //display the error
     showError();
-
-    throw new Error(state.error.message);
   }
 
   //check for contact method
@@ -113,8 +109,6 @@ function onSubmit(e) {
     //display the error
     radioErrorElement.innerText = state.error.message;
     radioErrorElement.classList.remove("hidden");
-
-    throw new Error(state.error.message);
   }
 
   //check for message
@@ -124,8 +118,6 @@ function onSubmit(e) {
 
     //display the error
     showError();
-
-    throw new Error(state.error.message);
   }
 
   //check for consent
@@ -139,8 +131,6 @@ function onSubmit(e) {
 
     //display the error
     showError();
-
-    throw new Error(state.error.message);
   }
 
   //validate fields
@@ -173,21 +163,29 @@ function onSubmit(e) {
 
     //display the error
     showError();
-
-    throw new Error(state.error.message);
   }
 
-  //if there are no errors submit the form
-  //reset error state
-  setError();
+  //check if an error occured and if so throw an error
+  if (state.error.errorStatus) {
+    throw new Error("Form could not be submitted!");
+  }
 
-  //select all error elements
-  const errorNodeList = document.querySelectorAll("error");
+  //if there were errors before the submit, but all validations passed, all elements are recorded in error element list in the state
+  const errorElements = state.error.errorElementsList;
+  if (errorElements.length > 0) {
+    //reset error form elements
+    for (let i = 0; i < errorElements.length; i++) {
+      //hide the error element
+      hideErrors(errorElements[i]["input"], errorElements[i]["field"]);
+    }
 
-  //hide error elements
-  errorNodeList.forEach((element) => {
-    element.classList.add("hidden");
-  });
+    //reset error state
+    state.error.message = "";
+    state.error.input = "";
+    state.error.field = "";
+    state.error.errorStatus = false;
+    state.error.errorElementsList.length = 0;
+  }
 
   //reset app state
   state.firstName = "";
@@ -205,6 +203,11 @@ function onSubmit(e) {
   radioSupportRequest.checked = false;
   textareaMessage.value = "";
   checkboxConsent.checked = false;
+
+  //remove the selected classes from custom checkbox and radio buttons
+  radioGeneralEnquiryCustom.classList.remove("custom-radio-selected");
+  radioSupportRequestCustom.classList.remove("custom-radio-selected");
+  checkboxCustom.classList.remove("custom-check-selected");
 
   //display the success cpmponent
   successToast.classList.remove("hidden");
@@ -293,10 +296,15 @@ function setError(errorMessage = "", field = "", input = "") {
   state.error.message = errorMessage;
   state.error.input = input;
   state.error.field = field;
+  state.error.errorStatus = true;
+
+  if (field && input) {
+    state.error.errorElementsList.push({ field, input });
+  }
 }
 
 /**
- * function to set and display errors
+ * function to display errors
  */
 function showError() {
   //select the field elements
@@ -312,6 +320,26 @@ function showError() {
   //update error element
   errorElement.innerText = state.error.message;
   errorElement.classList.remove("hidden");
+}
+
+/**
+ * function to hide errors
+ * runs after every successful submit if an error occured before
+ */
+function hideErrors(input, field) {
+  //select the field elements
+  const errorElement = document.getElementById(field);
+  const errorInput = document.getElementById(input);
+
+  //make aria invalid false
+  errorInput.setAttribute("aria-invalid", "false");
+
+  //remove the error class from the input
+  errorInput.classList.remove("input-error");
+
+  //hide error element
+  errorElement.innerText = "";
+  errorElement.classList.add("hidden");
 }
 
 /**
