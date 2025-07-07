@@ -46,7 +46,6 @@ const state = {
     input: "", //id of the input element error occured
     field: "", //id of the corresponding error field
     errorElementsList: [], //ids of the elements on which an error occured
-    errorStatus: false,
   },
 };
 
@@ -174,11 +173,6 @@ function onSubmit(e) {
     showError();
   }
 
-  //check if an error occured and if so throw an error
-  if (state.error.errorStatus) {
-    throw new Error("Form could not be submitted!");
-  }
-
   //if there were errors before the submit, but all validations passed, all elements are recorded in error element list in the state
   const errorElements = state.error.errorElementsList;
   if (errorElements.length > 0) {
@@ -187,36 +181,10 @@ function onSubmit(e) {
       //hide the error element
       hideErrors(errorElements[i]["input"], errorElements[i]["field"]);
     }
-
-    //reset error state
-    state.error.message = "";
-    state.error.input = "";
-    state.error.field = "";
-    state.error.errorStatus = false;
-    state.error.errorElementsList.length = 0;
   }
 
-  //reset app state
-  state.firstName = "";
-  state.lastName = "";
-  state.email = "";
-  state.contactMethod = "";
-  state.message = "";
-  state.consent = false;
-
-  //clear input fields
-  inputFirstName.value = "";
-  inputLastName.value = "";
-  inputEmail.value = "";
-  radioGeneralEnquiry.checked = false;
-  radioSupportRequest.checked = false;
-  textareaMessage.value = "";
-  checkboxConsent.checked = false;
-
-  //remove the selected classes from custom checkbox and radio buttons
-  radioGeneralEnquiryCustom.classList.remove("custom-radio-selected");
-  radioSupportRequestCustom.classList.remove("custom-radio-selected");
-  checkboxCustom.classList.remove("custom-check-selected");
+  //reset form
+  reset();
 
   //display the success cpmponent
   successToast.classList.remove("hidden");
@@ -227,6 +195,9 @@ function onSubmit(e) {
  * @param e - change event
  */
 function setFirstName(e) {
+  //hide the success message
+  successToast.classList.add("hidden");
+
   state.firstName = e.target.value;
 }
 
@@ -235,6 +206,9 @@ function setFirstName(e) {
  * @param e - change event
  */
 function setLastName(e) {
+  //hide the success message
+  successToast.classList.add("hidden");
+
   state.lastName = e.target.value;
 }
 
@@ -243,6 +217,9 @@ function setLastName(e) {
  * @param e - change event
  */
 function setEmail(e) {
+  //hide the success message
+  successToast.classList.add("hidden");
+
   state.email = e.target.value;
 }
 
@@ -251,6 +228,9 @@ function setEmail(e) {
  * @param e - click event on the radio buttons
  */
 function setContactMethod(e) {
+  //hide the success message
+  successToast.classList.add("hidden");
+
   state.contactMethod = e.target.value;
 
   //get the id of the custom radio button
@@ -275,6 +255,9 @@ function setContactMethod(e) {
  * @param e - change event
  */
 function setMessage(e) {
+  //hide the success message
+  successToast.classList.add("hidden");
+
   state.message = e.target.value;
 }
 
@@ -283,6 +266,9 @@ function setMessage(e) {
  * @param e - change event
  */
 function setConsent(e) {
+  //hide the success message
+  successToast.classList.add("hidden");
+
   //boolean
   state.consent = e.target.checked;
 
@@ -305,7 +291,6 @@ function setError(errorMessage = "", field = "", input = "") {
   state.error.message = errorMessage;
   state.error.input = input;
   state.error.field = field;
-  state.error.errorStatus = true;
 
   if (field && input) {
     state.error.errorElementsList.push({ field, input });
@@ -329,6 +314,10 @@ function showError() {
   //update error element
   errorElement.innerText = state.error.message;
   errorElement.classList.remove("hidden");
+
+  //throw the error in the console
+
+  throw new Error(state.error.message);
 }
 
 /**
@@ -349,6 +338,39 @@ function hideErrors(input, field) {
   //hide error element
   errorElement.innerText = "";
   errorElement.classList.add("hidden");
+}
+
+/**
+ * function to reset the form
+ */
+function reset() {
+  //reset error state
+  state.error.message = "";
+  state.error.input = "";
+  state.error.field = "";
+  state.error.errorElementsList.length = 0;
+
+  //reset app state
+  state.firstName = "";
+  state.lastName = "";
+  state.email = "";
+  state.contactMethod = "";
+  state.message = "";
+  state.consent = false;
+
+  //clear input fields
+  inputFirstName.value = "";
+  inputLastName.value = "";
+  inputEmail.value = "";
+  radioGeneralEnquiry.checked = false;
+  radioSupportRequest.checked = false;
+  textareaMessage.value = "";
+  checkboxConsent.checked = false;
+
+  //remove the selected classes from custom checkbox and radio buttons
+  radioGeneralEnquiryCustom.classList.remove("custom-radio-selected");
+  radioSupportRequestCustom.classList.remove("custom-radio-selected");
+  checkboxCustom.classList.remove("custom-check-selected");
 }
 
 /**
